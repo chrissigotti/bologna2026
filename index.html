@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>La Grande Partenza</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    background:
+        linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.75)),
+        url("herrenreise.jpg") center/cover no-repeat;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+.wrapper {
+    width: 100%;
+    padding: 30px 15px;
+}
+
+h1 {
+    font-size: clamp(2.2rem, 8vw, 6rem);
+    margin: 0 0 10px;
+    letter-spacing: 3px;
+    text-shadow: 0 6px 20px rgba(0,0,0,.8);
+}
+
+.subtitle {
+    font-size: clamp(1.1rem, 3vw, 2rem);
+    margin-bottom: 35px;
+    opacity: .95;
+}
+
+.timer {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.flip-card {
+    width: 135px;
+}
+
+.flip-number {
+    background: #111;
+    border-radius: 14px;
+    border: 2px solid rgba(255,255,255,.2);
+    box-shadow: 0 12px 35px rgba(0,0,0,.7);
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.2;
+    padding: 18px 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.flip-number::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 2px;
+    background: rgba(255,255,255,.18);
+    z-index: 2;
+}
+
+.flip-number.change {
+    animation: flip .55s ease;
+}
+
+@keyframes flip {
+    0%   { transform: rotateX(0deg); }
+    50%  { transform: rotateX(-90deg); }
+    100% { transform: rotateX(0deg); }
+}
+
+.label {
+    margin-top: 12px;
+    font-size: .95rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: .85;
+}
+
+.status {
+    margin-top: 35px;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    opacity: .95;
+}
+
+.done {
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    font-weight: 900;
+    text-shadow: 0 8px 25px rgba(0,0,0,.8);
+}
+
+@media (max-width: 600px) {
+    .flip-card {
+        width: 42%;
+    }
+
+    .timer {
+        gap: 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+    <h1>La Grande Partenza</h1>
+
+    <div class="subtitle">
+        Bologna • 17 Luglio 2026 • Ore 11:00
+    </div>
+
+    <div id="timer" class="timer">
+        <div class="flip-card">
+            <div class="flip-number" id="days">00</div>
+            <div class="label">Tage</div>
+        </div>
+
+        <div class="flip-card">
+            <div class="flip-number" id="hours">00</div>
+            <div class="label">Stunden</div>
+        </div>
+
+        <div class="flip-card">
+            <div class="flip-number" id="minutes">00</div>
+            <div class="label">Minuten</div>
+        </div>
+
+        <div class="flip-card">
+            <div class="flip-number" id="seconds">00</div>
+            <div class="label">Sekunden</div>
+        </div>
+    </div>
+
+    <div class="status" id="status">Operazione Italia 🍻</div>
+</div>
+
+<script>
+const target = new Date("2026-07-17T11:00:00+02:00").getTime();
+
+const phrases = [
+    "Operazione Birra",
+    "Missione Aperol",
+    "Dolce Vita Tour 2026",
+    "La Squadra è Pronta",
+    "Vacanza Leggendaria",
+    "Bologna wartet 🍝",
+    "Andiamo ragazzi 🇮🇹"
+];
+
+let previous = {};
+
+function setNumber(id, value) {
+    const el = document.getElementById(id);
+    const formatted = String(value).padStart(2, "0");
+
+    if (previous[id] !== formatted) {
+        el.classList.remove("change");
+        void el.offsetWidth;
+        el.classList.add("change");
+        el.innerText = formatted;
+        previous[id] = formatted;
+    }
+}
+
+function updateCountdown() {
+    const now = new Date().getTime();
+    const diff = target - now;
+
+    if (diff <= 0) {
+        document.querySelector(".wrapper").innerHTML =
+            '<div class="done">ANDIAMO! 🍻🇮🇹</div>';
+        return;
+    }
+
+    setNumber("days", Math.floor(diff / (1000 * 60 * 60 * 24)));
+    setNumber("hours", Math.floor((diff / (1000 * 60 * 60)) % 24));
+    setNumber("minutes", Math.floor((diff / (1000 * 60)) % 60));
+    setNumber("seconds", Math.floor((diff / 1000) % 60));
+}
+
+function rotatePhrase() {
+    const status = document.getElementById("status");
+    const phrase = phrases[Math.floor(Math.random() * phrases.length)];
+    status.innerText = phrase;
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+setInterval(rotatePhrase, 5000);
+</script>
+
+</body>
+</html>
