@@ -2,401 +2,215 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>Bologna 2026 • La Grande Partenza</title>
-<meta name="description" content="Countdown zur Bologna-Reise 2026">
-<meta property="og:title" content="La Grande Partenza • Bologna 2026">
-<meta property="og:description" content="Countdown bis zur Abfahrt nach Bologna">
-<meta property="og:type" content="website">
-
+<title>La Grande Partenza</title>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
 * { box-sizing: border-box; }
 
-:root {
-    --cream: #f7ead0;
-    --gold: #d6a64f;
-    --dark: #080808;
-    --green: #0f5f3c;
-    --red: #a92323;
-}
-
-html, body {
-    margin: 0;
-    min-height: 100%;
-}
-
 body {
-    min-height: 100vh;
-    font-family: 'Inter', Arial, sans-serif;
-    color: white;
+    margin: 0;
+    font-family: Inter, sans-serif;
     background:
-        radial-gradient(circle at top, rgba(214,166,79,.18), transparent 35%),
-        linear-gradient(rgba(0,0,0,.38), rgba(0,0,0,.82)),
-        url("herrenreise.jpg") center/cover no-repeat fixed;
+        linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.78)),
+        url('herrenreise.jpg') center/cover fixed;
+    color: #fff;
     display: flex;
-    align-items: center;
     justify-content: center;
-    text-align: center;
-    overflow: hidden;
-}
-
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: url("herrenreise.jpg") center/cover no-repeat;
-    transform: scale(1.04);
-    z-index: -2;
-    animation: slowZoom 32s ease-in-out infinite alternate;
-}
-
-body::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background:
-        linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.8)),
-        repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 1px, transparent 1px 4px);
-    z-index: -1;
-}
-
-@keyframes slowZoom {
-    from { transform: scale(1.02); }
-    to   { transform: scale(1.12); }
-}
-
-.wrapper {
-    width: min(1120px, 100%);
-    padding: 28px 16px;
-    position: relative;
-}
-
-.badge {
-    display: inline-flex;
-    gap: 10px;
     align-items: center;
-    padding: 9px 15px;
-    border: 1px solid rgba(255,255,255,.35);
-    border-radius: 999px;
-    background: rgba(0,0,0,.35);
-    backdrop-filter: blur(8px);
-    font-size: .85rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 18px;
+    min-height: 100vh;
+    text-align: center;
 }
 
-.flag {
-    width: 42px;
-    height: 25px;
-    border-radius: 5px;
-    overflow: hidden;
-    display: inline-grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    box-shadow: 0 4px 14px rgba(0,0,0,.35);
+.wrap {
+    max-width: 1100px;
+    width: 100%;
+    padding: 24px 18px;
 }
-.flag span:nth-child(1) { background: #009246; }
-.flag span:nth-child(2) { background: white; }
-.flag span:nth-child(3) { background: #ce2b37; }
 
 h1 {
-    font-family: 'Cinzel', serif;
-    font-size: clamp(2.4rem, 8vw, 7rem);
+    font-family: Cinzel, serif;
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    margin: 0;
     line-height: .95;
-    margin: 0 0 12px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    text-shadow: 0 8px 28px rgba(0,0,0,.88);
+    text-shadow: 0 8px 28px rgba(0,0,0,.8);
 }
 
-.destination {
-    font-size: clamp(1rem, 3vw, 1.55rem);
-    color: var(--cream);
-    letter-spacing: 1px;
-    margin-bottom: 34px;
-    text-shadow: 0 3px 14px rgba(0,0,0,.8);
-}
-
-.board {
-    display: inline-block;
-    width: min(980px, 100%);
-    padding: clamp(16px, 3vw, 30px);
-    border-radius: 28px;
-    background: rgba(4,4,4,.58);
-    border: 1px solid rgba(255,255,255,.18);
-    box-shadow: 0 28px 70px rgba(0,0,0,.72);
-    backdrop-filter: blur(10px);
+.sub {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    margin: 12px 0 32px;
+    color: #f2dfb0;
 }
 
 .timer {
     display: grid;
-    grid-template-columns: repeat(4, minmax(120px, 1fr));
-    gap: clamp(10px, 2vw, 18px);
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
 }
 
-.flip-card {
-    min-width: 0;
-}
-
-.flip-number {
-    position: relative;
-    overflow: hidden;
+.n {
+    background: linear-gradient(#1b1b1b, #050505);
     border-radius: 18px;
-    background:
-        linear-gradient(#1b1b1b, #050505);
-    border: 1px solid rgba(255,255,255,.22);
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.18),
-        inset 0 -1px 0 rgba(0,0,0,.85),
-        0 12px 32px rgba(0,0,0,.72);
-    font-size: clamp(2.7rem, 8vw, 6.4rem);
+    padding: 20px 10px;
+    font-size: clamp(3rem, 8vw, 5rem);
     font-weight: 900;
+    border: 1px solid rgba(255,255,255,.22);
+    box-shadow: 0 14px 34px rgba(0,0,0,.65);
     font-variant-numeric: tabular-nums;
-    line-height: 1;
-    padding: clamp(18px, 3vw, 28px) 8px;
-    perspective: 600px;
 }
 
-.flip-number::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 50%;
-    height: 2px;
-    background: rgba(255,255,255,.18);
-    box-shadow: 0 1px 0 rgba(0,0,0,.8);
-    z-index: 2;
-}
-
-.flip-number::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(rgba(255,255,255,.12), transparent 48%, rgba(0,0,0,.32) 52%, transparent);
-    pointer-events: none;
-}
-
-.flip-number.change {
-    animation: flip .56s cubic-bezier(.25,.75,.25,1);
-}
-
-@keyframes flip {
-    0%   { transform: rotateX(0deg); filter: brightness(1); }
-    48%  { transform: rotateX(-90deg); filter: brightness(.6); }
-    52%  { transform: rotateX(90deg); filter: brightness(.6); }
-    100% { transform: rotateX(0deg); filter: brightness(1); }
-}
-
-.label {
-    margin-top: 12px;
-    font-size: .82rem;
+.l {
+    margin-top: 10px;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    letter-spacing: 2.5px;
-    color: var(--cream);
-    opacity: .9;
+    font-size: .8rem;
+    color: #f2dfb0;
+}
+
+.train {
+    font-size: 2.8rem;
+    margin: 24px 0 8px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    50% { transform: scale(1.08); }
 }
 
 .status {
-    margin-top: 28px;
-    font-family: 'Cinzel', serif;
-    font-size: clamp(1rem, 2.8vw, 1.65rem);
-    color: var(--gold);
-    letter-spacing: 1px;
+    margin-top: 8px;
+    font-family: Cinzel, serif;
+    color: #d9b05a;
+    font-size: clamp(1.1rem, 3vw, 1.45rem);
     min-height: 2rem;
 }
 
-.route {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-top: 18px;
-    color: rgba(255,255,255,.9);
-    font-size: .95rem;
+.crew {
+    margin: 32px auto 0;
+    max-width: 760px;
+    padding: 22px 18px;
+    border-radius: 24px;
+    background: rgba(0,0,0,.48);
+    border: 1px solid rgba(255,255,255,.18);
+    box-shadow: 0 18px 42px rgba(0,0,0,.45);
+    backdrop-filter: blur(8px);
 }
 
-.route span {
-    padding: 8px 12px;
+.crew h2 {
+    font-family: Cinzel, serif;
+    margin: 0 0 6px;
+    color: #f2dfb0;
+    letter-spacing: 2px;
+}
+
+.crew .crew-sub {
+    color: #d9b05a;
+    margin-bottom: 18px;
+    letter-spacing: 1px;
+}
+
+.passengers {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.passenger {
+    padding: 9px 13px;
     border-radius: 999px;
     background: rgba(255,255,255,.10);
-    border: 1px solid rgba(255,255,255,.14);
+    border: 1px solid rgba(255,255,255,.16);
 }
 
-
-
-@keyframes drive {
-    0%   { transform: translateX(-120px); }
-    100% { transform: translateX(calc(100vw + 160px)); }
+.passenger.pending {
+    border-color: rgba(217,176,90,.8);
+    color: #f2dfb0;
 }
 
-.confetti {
-    position: fixed;
-    top: -20px;
-    width: 10px;
-    height: 16px;
-    animation: fall linear forwards;
-    z-index: 20;
-}
-
-@keyframes fall {
-    to {
-        transform: translateY(110vh) rotate(720deg);
-        opacity: .2;
-    }
-}
-
-.done {
-    font-family: 'Cinzel', serif;
-    font-size: clamp(3rem, 10vw, 8rem);
-    font-weight: 800;
-    color: var(--cream);
-    text-shadow: 0 10px 30px rgba(0,0,0,.85);
-}
-
-@media (max-width: 720px) {
-    body { background-attachment: scroll; }
-    .timer {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .board {
-        border-radius: 22px;
-    }
-    .badge {
-        font-size: .72rem;
-        letter-spacing: 1px;
-    }
-}
-
-@media (max-width: 380px) {
-    .timer { gap: 8px; }
-    .label { font-size: .68rem; letter-spacing: 1.4px; }
+@media(max-width:700px) {
+    .timer { grid-template-columns: repeat(2, 1fr); }
+    .crew { margin-top: 24px; }
 }
 </style>
 </head>
 
 <body>
+<div class="wrap">
+    <h1>LA GRANDE PARTENZA</h1>
+    <div class="sub">Bologna • 17 Luglio 2026 • Ore 11:00</div>
 
-
-<main class="wrapper">
-    <div class="badge">
-        <span class="flag"><span></span><span></span><span></span></span>
-        Estate 2026
+    <div class="timer">
+        <div><div id="d" class="n">00</div><div class="l">Tage</div></div>
+        <div><div id="h" class="n">00</div><div class="l">Stunden</div></div>
+        <div><div id="m" class="n">00</div><div class="l">Minuten</div></div>
+        <div><div id="s" class="n">00</div><div class="l">Sekunden</div></div>
     </div>
 
-    <h1>La Grande<br>Partenza</h1>
+    <div class="train">🚄</div>
+    <div class="status" id="status">Operazione Birra 🍺</div>
 
-    <div class="destination">
-        Bologna • 17 Luglio 2026 • Ore 11:00
-    </div>
+    <section class="crew">
+        <h2>👥 La Squadra</h2>
+        <div class="crew-sub">🇮🇹 Equipaggio del Treno</div>
 
-    <section class="board">
-        <div id="timer" class="timer">
-            <div class="flip-card">
-                <div class="flip-number" id="days">00</div>
-                <div class="label">Tage</div>
-            </div>
-            <div class="flip-card">
-                <div class="flip-number" id="hours">00</div>
-                <div class="label">Stunden</div>
-            </div>
-            <div class="flip-card">
-                <div class="flip-number" id="minutes">00</div>
-                <div class="label">Minuten</div>
-            </div>
-            <div class="flip-card">
-                <div class="flip-number" id="seconds">00</div>
-                <div class="label">Sekunden</div>
-            </div>
-        </div>
-
-        <div class="status" id="status">Operazione Italia 🍻</div>
-
-        <div class="route">
-            <span>🚗 Traintrip</span>
-            <span>🍝 Bologna</span>
-            <span>🍹 Aperol-Modus</span>
+        <div class="passengers">
+            <div class="passenger">🚄 Friedolin</div>
+            <div class="passenger">🚄 Wolfi</div>
+            <div class="passenger">🚄 Michi</div>
+            <div class="passenger">🚄 Vatergans</div>
+            <div class="passenger">🚄 Pirmin</div>
+            <div class="passenger">🚄 Klausi</div>
+            <div class="passenger pending">❓ Flexman?</div>
         </div>
     </section>
-</main>
+</div>
 
 <script>
 const target = new Date("2026-07-17T11:00:00+02:00").getTime();
 
 const phrases = [
-
     "Operazione Birra 🍺",
     "Missione Aperol 🍹",
     "Dolce Vita Tour 2026 🇮🇹",
     "La Squadra è Pronta 💪",
     "Vacanza Leggendaria ☀️",
-    "Bologna amore mio 🍝",
-    "Andiamo ragazzi! 🇮🇹"
+    "Bologna wartet 🍝",
+    "Andiamo ragazzi 🇮🇹"
 ];
 
-let previous = {};
-
-function setNumber(id, value) {
-    const el = document.getElementById(id);
-    const formatted = String(value).padStart(2, "0");
-
-    if (previous[id] !== formatted) {
-        el.classList.remove("change");
-        void el.offsetWidth;
-        el.classList.add("change");
-        el.innerText = formatted;
-        previous[id] = formatted;
-    }
+function set(id, value) {
+    document.getElementById(id).textContent = String(value).padStart(2, "0");
 }
 
-function updateCountdown() {
-    const now = new Date().getTime();
-    const diff = target - now;
+function tick() {
+    const diff = target - Date.now();
 
     if (diff <= 0) {
-        document.querySelector(".wrapper").innerHTML =
-            '<div class="done">SI PARTE! 🍻🇮🇹</div>';
-        launchConfetti();
+        document.body.innerHTML =
+            "<h1 style='font-family:Cinzel,serif;color:white;text-align:center'>SI PARTE! 🍻🇮🇹</h1>";
         return;
     }
 
-    setNumber("days", Math.floor(diff / (1000 * 60 * 60 * 24)));
-    setNumber("hours", Math.floor((diff / (1000 * 60 * 60)) % 24));
-    setNumber("minutes", Math.floor((diff / (1000 * 60)) % 60));
-    setNumber("seconds", Math.floor((diff / 1000) % 60));
+    set("d", Math.floor(diff / 86400000));
+    set("h", Math.floor(diff / 3600000) % 24);
+    set("m", Math.floor(diff / 60000) % 60);
+    set("s", Math.floor(diff / 1000) % 60);
 }
 
-function rotatePhrase() {
-    const status = document.getElementById("status");
-    if (!status) return;
-    status.innerText = phrases[Math.floor(Math.random() * phrases.length)];
-}
+tick();
+setInterval(tick, 1000);
 
-function launchConfetti() {
-    const colors = ["#009246", "#ffffff", "#ce2b37", "#d6a64f"];
-    for (let i = 0; i < 70; i++) {
-        const piece = document.createElement("div");
-        piece.className = "confetti";
-        piece.style.left = Math.random() * 100 + "vw";
-        piece.style.background = colors[Math.floor(Math.random() * colors.length)];
-        piece.style.animationDuration = (2 + Math.random() * 3) + "s";
-        piece.style.animationDelay = Math.random() * 1.5 + "s";
-        document.body.appendChild(piece);
-        setTimeout(() => piece.remove(), 6000);
-    }
-}
-
-updateCountdown();
-setInterval(updateCountdown, 1000);
-setInterval(rotatePhrase, 5000);
+setInterval(() => {
+    document.getElementById("status").textContent =
+        phrases[Math.floor(Math.random() * phrases.length)];
+}, 5000);
 </script>
-
 </body>
 </html>
