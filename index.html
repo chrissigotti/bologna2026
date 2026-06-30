@@ -4,19 +4,42 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>La Grande Partenza</title>
+<title>Bologna 2026 • La Grande Partenza</title>
+<meta name="description" content="Countdown zur Bologna-Reise 2026">
+<meta property="og:title" content="La Grande Partenza • Bologna 2026">
+<meta property="og:description" content="Countdown bis zur Abfahrt nach Bologna">
+<meta property="og:type" content="website">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
 * { box-sizing: border-box; }
 
-body {
+:root {
+    --cream: #f7ead0;
+    --gold: #d6a64f;
+    --dark: #080808;
+    --green: #0f5f3c;
+    --red: #a92323;
+}
+
+html, body {
     margin: 0;
+    min-height: 100%;
+}
+
+body {
     min-height: 100vh;
-    font-family: Arial, Helvetica, sans-serif;
-    background:
-        linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.75)),
-        url("herrenreise.jpg") center/cover no-repeat;
+    font-family: 'Inter', Arial, sans-serif;
     color: white;
+    background:
+        radial-gradient(circle at top, rgba(214,166,79,.18), transparent 35%),
+        linear-gradient(rgba(0,0,0,.38), rgba(0,0,0,.82)),
+        url("herrenreise.jpg") center/cover no-repeat fixed;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -24,46 +47,121 @@ body {
     overflow: hidden;
 }
 
-.wrapper {
-    width: 100%;
-    padding: 30px 15px;
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: url("herrenreise.jpg") center/cover no-repeat;
+    transform: scale(1.04);
+    z-index: -2;
+    animation: slowZoom 32s ease-in-out infinite alternate;
 }
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+        linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.8)),
+        repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 1px, transparent 1px 4px);
+    z-index: -1;
+}
+
+@keyframes slowZoom {
+    from { transform: scale(1.02); }
+    to   { transform: scale(1.12); }
+}
+
+.wrapper {
+    width: min(1120px, 100%);
+    padding: 28px 16px;
+    position: relative;
+}
+
+.badge {
+    display: inline-flex;
+    gap: 10px;
+    align-items: center;
+    padding: 9px 15px;
+    border: 1px solid rgba(255,255,255,.35);
+    border-radius: 999px;
+    background: rgba(0,0,0,.35);
+    backdrop-filter: blur(8px);
+    font-size: .85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+}
+
+.flag {
+    width: 42px;
+    height: 25px;
+    border-radius: 5px;
+    overflow: hidden;
+    display: inline-grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    box-shadow: 0 4px 14px rgba(0,0,0,.35);
+}
+.flag span:nth-child(1) { background: #009246; }
+.flag span:nth-child(2) { background: white; }
+.flag span:nth-child(3) { background: #ce2b37; }
 
 h1 {
-    font-size: clamp(2.2rem, 8vw, 6rem);
-    margin: 0 0 10px;
-    letter-spacing: 3px;
-    text-shadow: 0 6px 20px rgba(0,0,0,.8);
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2.4rem, 8vw, 7rem);
+    line-height: .95;
+    margin: 0 0 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    text-shadow: 0 8px 28px rgba(0,0,0,.88);
 }
 
-.subtitle {
-    font-size: clamp(1.1rem, 3vw, 2rem);
-    margin-bottom: 35px;
-    opacity: .95;
+.destination {
+    font-size: clamp(1rem, 3vw, 1.55rem);
+    color: var(--cream);
+    letter-spacing: 1px;
+    margin-bottom: 34px;
+    text-shadow: 0 3px 14px rgba(0,0,0,.8);
+}
+
+.board {
+    display: inline-block;
+    width: min(980px, 100%);
+    padding: clamp(16px, 3vw, 30px);
+    border-radius: 28px;
+    background: rgba(4,4,4,.58);
+    border: 1px solid rgba(255,255,255,.18);
+    box-shadow: 0 28px 70px rgba(0,0,0,.72);
+    backdrop-filter: blur(10px);
 }
 
 .timer {
-    display: flex;
-    justify-content: center;
-    gap: 18px;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(120px, 1fr));
+    gap: clamp(10px, 2vw, 18px);
 }
 
 .flip-card {
-    width: 135px;
+    min-width: 0;
 }
 
 .flip-number {
-    background: #111;
-    border-radius: 14px;
-    border: 2px solid rgba(255,255,255,.2);
-    box-shadow: 0 12px 35px rgba(0,0,0,.7);
-    font-size: clamp(3rem, 8vw, 5.5rem);
-    font-weight: 900;
-    line-height: 1.2;
-    padding: 18px 10px;
     position: relative;
     overflow: hidden;
+    border-radius: 18px;
+    background:
+        linear-gradient(#1b1b1b, #050505);
+    border: 1px solid rgba(255,255,255,.22);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.18),
+        inset 0 -1px 0 rgba(0,0,0,.85),
+        0 12px 32px rgba(0,0,0,.72);
+    font-size: clamp(2.7rem, 8vw, 6.4rem);
+    font-weight: 900;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    padding: clamp(18px, 3vw, 28px) 8px;
+    perspective: 600px;
 }
 
 .flip-number::before {
@@ -74,96 +172,173 @@ h1 {
     top: 50%;
     height: 2px;
     background: rgba(255,255,255,.18);
+    box-shadow: 0 1px 0 rgba(0,0,0,.8);
     z-index: 2;
 }
 
+.flip-number::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(rgba(255,255,255,.12), transparent 48%, rgba(0,0,0,.32) 52%, transparent);
+    pointer-events: none;
+}
+
 .flip-number.change {
-    animation: flip .55s ease;
+    animation: flip .56s cubic-bezier(.25,.75,.25,1);
 }
 
 @keyframes flip {
-    0%   { transform: rotateX(0deg); }
-    50%  { transform: rotateX(-90deg); }
-    100% { transform: rotateX(0deg); }
+    0%   { transform: rotateX(0deg); filter: brightness(1); }
+    48%  { transform: rotateX(-90deg); filter: brightness(.6); }
+    52%  { transform: rotateX(90deg); filter: brightness(.6); }
+    100% { transform: rotateX(0deg); filter: brightness(1); }
 }
 
 .label {
     margin-top: 12px;
-    font-size: .95rem;
+    font-size: .82rem;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    opacity: .85;
+    letter-spacing: 2.5px;
+    color: var(--cream);
+    opacity: .9;
 }
 
 .status {
-    margin-top: 35px;
-    font-size: clamp(1rem, 2.5vw, 1.5rem);
-    opacity: .95;
+    margin-top: 28px;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1rem, 2.8vw, 1.65rem);
+    color: var(--gold);
+    letter-spacing: 1px;
+    min-height: 2rem;
+}
+
+.route {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 18px;
+    color: rgba(255,255,255,.9);
+    font-size: .95rem;
+}
+
+.route span {
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.10);
+    border: 1px solid rgba(255,255,255,.14);
+}
+
+
+
+@keyframes drive {
+    0%   { transform: translateX(-120px); }
+    100% { transform: translateX(calc(100vw + 160px)); }
+}
+
+.confetti {
+    position: fixed;
+    top: -20px;
+    width: 10px;
+    height: 16px;
+    animation: fall linear forwards;
+    z-index: 20;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: .2;
+    }
 }
 
 .done {
-    font-size: clamp(2.5rem, 8vw, 6rem);
-    font-weight: 900;
-    text-shadow: 0 8px 25px rgba(0,0,0,.8);
+    font-family: 'Cinzel', serif;
+    font-size: clamp(3rem, 10vw, 8rem);
+    font-weight: 800;
+    color: var(--cream);
+    text-shadow: 0 10px 30px rgba(0,0,0,.85);
 }
 
-@media (max-width: 600px) {
-    .flip-card {
-        width: 42%;
-    }
-
+@media (max-width: 720px) {
+    body { background-attachment: scroll; }
     .timer {
-        gap: 12px;
+        grid-template-columns: repeat(2, 1fr);
     }
+    .board {
+        border-radius: 22px;
+    }
+    .badge {
+        font-size: .72rem;
+        letter-spacing: 1px;
+    }
+}
+
+@media (max-width: 380px) {
+    .timer { gap: 8px; }
+    .label { font-size: .68rem; letter-spacing: 1.4px; }
 }
 </style>
 </head>
 
 <body>
 
-<div class="wrapper">
-    <h1>La Grande Partenza</h1>
 
-    <div class="subtitle">
+<main class="wrapper">
+    <div class="badge">
+        <span class="flag"><span></span><span></span><span></span></span>
+        Estate 2026
+    </div>
+
+    <h1>La Grande<br>Partenza</h1>
+
+    <div class="destination">
         Bologna • 17 Luglio 2026 • Ore 11:00
     </div>
 
-    <div id="timer" class="timer">
-        <div class="flip-card">
-            <div class="flip-number" id="days">00</div>
-            <div class="label">Tage</div>
+    <section class="board">
+        <div id="timer" class="timer">
+            <div class="flip-card">
+                <div class="flip-number" id="days">00</div>
+                <div class="label">Tage</div>
+            </div>
+            <div class="flip-card">
+                <div class="flip-number" id="hours">00</div>
+                <div class="label">Stunden</div>
+            </div>
+            <div class="flip-card">
+                <div class="flip-number" id="minutes">00</div>
+                <div class="label">Minuten</div>
+            </div>
+            <div class="flip-card">
+                <div class="flip-number" id="seconds">00</div>
+                <div class="label">Sekunden</div>
+            </div>
         </div>
 
-        <div class="flip-card">
-            <div class="flip-number" id="hours">00</div>
-            <div class="label">Stunden</div>
-        </div>
+        <div class="status" id="status">Operazione Italia 🍻</div>
 
-        <div class="flip-card">
-            <div class="flip-number" id="minutes">00</div>
-            <div class="label">Minuten</div>
+        <div class="route">
+            <span>🚗 Traintrip</span>
+            <span>🍝 Bologna</span>
+            <span>🍹 Aperol-Modus</span>
         </div>
-
-        <div class="flip-card">
-            <div class="flip-number" id="seconds">00</div>
-            <div class="label">Sekunden</div>
-        </div>
-    </div>
-
-    <div class="status" id="status">Operazione Italia 🍻</div>
-</div>
+    </section>
+</main>
 
 <script>
 const target = new Date("2026-07-17T11:00:00+02:00").getTime();
 
 const phrases = [
-    "Operazione Birra",
-    "Missione Aperol",
-    "Dolce Vita Tour 2026",
-    "La Squadra è Pronta",
-    "Vacanza Leggendaria",
-    "Bologna wartet 🍝",
-    "Andiamo ragazzi 🇮🇹"
+
+    "Operazione Birra 🍺",
+    "Missione Aperol 🍹",
+    "Dolce Vita Tour 2026 🇮🇹",
+    "La Squadra è Pronta 💪",
+    "Vacanza Leggendaria ☀️",
+    "Bologna amore mio 🍝",
+    "Andiamo ragazzi! 🇮🇹"
 ];
 
 let previous = {};
@@ -187,7 +362,8 @@ function updateCountdown() {
 
     if (diff <= 0) {
         document.querySelector(".wrapper").innerHTML =
-            '<div class="done">ANDIAMO! 🍻🇮🇹</div>';
+            '<div class="done">SI PARTE! 🍻🇮🇹</div>';
+        launchConfetti();
         return;
     }
 
@@ -199,8 +375,22 @@ function updateCountdown() {
 
 function rotatePhrase() {
     const status = document.getElementById("status");
-    const phrase = phrases[Math.floor(Math.random() * phrases.length)];
-    status.innerText = phrase;
+    if (!status) return;
+    status.innerText = phrases[Math.floor(Math.random() * phrases.length)];
+}
+
+function launchConfetti() {
+    const colors = ["#009246", "#ffffff", "#ce2b37", "#d6a64f"];
+    for (let i = 0; i < 70; i++) {
+        const piece = document.createElement("div");
+        piece.className = "confetti";
+        piece.style.left = Math.random() * 100 + "vw";
+        piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.animationDuration = (2 + Math.random() * 3) + "s";
+        piece.style.animationDelay = Math.random() * 1.5 + "s";
+        document.body.appendChild(piece);
+        setTimeout(() => piece.remove(), 6000);
+    }
 }
 
 updateCountdown();
